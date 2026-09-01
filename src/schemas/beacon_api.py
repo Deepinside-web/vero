@@ -33,24 +33,15 @@ class ValidatorStatus(Enum):
 
 class Validator(msgspec.Struct):
     pubkey: str
-    withdrawal_credentials: str
-    effective_balance: str
-    slashed: bool
-    activation_eligibility_epoch: str
-    activation_epoch: str
-    exit_epoch: str
-    withdrawable_epoch: str
 
 
 class ValidatorInfo(msgspec.Struct):
     index: str
-    balance: str
     status: ValidatorStatus
     validator: Validator
 
 
 class GetStateValidatorsResponse(ExecutionOptimisticResponse):
-    finalized: bool
     data: list[ValidatorInfo]
 
 
@@ -59,7 +50,6 @@ class BlockRoot(msgspec.Struct):
 
 
 class GetBlockRootResponse(ExecutionOptimisticResponse):
-    finalized: bool
     data: BlockRoot
 
 

@@ -260,10 +260,12 @@ class MultiBeaconNode:
         if len(ids) == 0:
             return []
 
-        request_body = {"ids": ids}
-        if statuses:
-            request_body["statuses"] = [s.value for s in statuses]
-        request_data = self._json_encoder.encode(request_body)
+        request_data = self._json_encoder.encode(
+            {
+                "ids": ids,
+                "statuses": [s.value for s in statuses] if statuses else None,
+            }
+        )
         resp: list[
             SchemaValidator.ValidatorIndexPubkey
         ] = await self._get_first_beacon_node_response(
